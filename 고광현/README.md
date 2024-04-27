@@ -11,7 +11,7 @@
 - AWS 서버 구축해보기
 
 ## 진행
-- [[chapter-01]]
-- [[chapter-02]]
+- [Chapter 01](chapter-01.md)
+- [Chapter 02](chapter-02.md)
 
 ## 회고
