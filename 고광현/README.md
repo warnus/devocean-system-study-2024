@@ -1,6 +1,6 @@
 # 스터디
 ## 책
-![책표지](assets/bookcover.png)
+![스터디 책표지](assets/bookcover.png)
 
 # 1주차
 ## 일정
