@@ -141,7 +141,7 @@ mysql -h database-1.ctuokcc0ymlc.ap-northeast-2.rds.amazonaws.com -u root -p < e
 from fastapi import FastAPI
 from databases import Database
 
-DATABASE_URL = "mysql://root:qlalfqjsgh1!@database-1.ctuokcc0ymlc.ap-northeast-2.rds.amazonaws.com/employees"
+DATABASE_URL = "mysql://root:[비밀번호]@database-1.ctuokcc0ymlc.ap-northeast-2.rds.amazonaws.com/employees"
 
 app = FastAPI()
 
@@ -184,6 +184,7 @@ async def read_user(user_id: int):
 
 ![](/이우승/assets/aws/rds_13.png)
 
+slave를 생성하고 이후 master에 쓰기 작업을 실행하면 slave에도 동일한 데이터가 sync 된다. 아래 캡처는 master에 데이터를 추가(좌측)하고 slave에서 데이터를 확인한 결과다(우측).
 ![](/이우승/assets/aws/rds_14.png)
 
 
