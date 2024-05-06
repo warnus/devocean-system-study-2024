@@ -51,6 +51,49 @@ poetry init
 poetry add fastapi databases aiomysql
 ```
 
+## ec2 추가 생성
+scale out 테스트를 위해 앞서 생성한 ec2와 동일한 ec2를 생성한다.
+
+### ami 생성
+
+![](/이우승/assets/aws/ec2_06.png)
+
+![](/이우승/assets/aws/ec2_07.png)
+
+![](/이우승/assets/aws/ec2_08.png)
+
+![](/이우승/assets/aws/ec2_09.png)
+
+![](/이우승/assets/aws/ec2_10.png)
+
+![](/이우승/assets/aws/ec2_11.png)
+
+![](/이우승/assets/aws/ec2_12.png)
+
+![](/이우승/assets/aws/ec2_13.png)
+
+
+
+## load balancer
+
+![](/이우승/assets/aws/lb_01.png)
+ ![](/이우승/assets/aws/lb_02.png) ![](/이우승/assets/aws/lb_03.png)mapping 설정 시 주의할 점은 Availability Zone 설정 때 EC2가 존재하는 AZ를 반드시 설정해야한다
+ 아래와 같이 생성된 EC2의 AZ를 확인해보자
+
+![](/이우승/assets/aws/lb_14.png)
+
+ ![](/이우승/assets/aws/lb_04.png) ![](/이우승/assets/aws/lb_05.png) ![](/이우승/assets/aws/lb_06.png) ![](/이우승/assets/aws/lb_07.png) ![](/이우승/assets/aws/lb_08.png)
+ Health Check 정보는 본인이 생성한 백엔드 프레임워크 동작 port와 path에 맞게 설정한다.
+ ![](/이우승/assets/aws/lb_09.png) ![](/이우승/assets/aws/lb_10.png) ![](/이우승/assets/aws/lb_11.png) ![](/이우승/assets/aws/lb_12.png)
+설정 주의 사항
+
+target group의 health check가 안 될 때
+- ec2에서 서비스가 잘 동작하는지 확인
+- 해당 서비스 Port로 inbound가 잘 설정되었는지 확인
+- LB IP에서 ec2로 접속 가능하도록 inbound 설정 필요
+
+인터넷에서 LB로 접속 안 될 때
+- security group 설정에서 inbound 설정이 잘 되었는지 확인
 
 
 ## RDS 설정
@@ -71,6 +114,10 @@ poetry add fastapi databases aiomysql
 ![](/이우승/assets/aws/rds_07.png)
 
 ![](/이우승/assets/aws/rds_08.png)
+
+
+
+
 
 
 ### RDS 접속
@@ -138,3 +185,48 @@ async def read_user(user_id: int):
 ![](/이우승/assets/aws/rds_13.png)
 
 ![](/이우승/assets/aws/rds_14.png)
+
+
+
+## Locust
+
+- https://locust.io/
+- 오픈 소스로 제공되는 부하 테스트 도구
+- 웹 애플리케이션의 성능을 측정하고 모니터링하는 데 사용
+
+```
+pip install locust
+```
+
+
+locustfile.py
+
+```
+from locust import HttpUser, between, task
+
+  
+
+class MyUser(HttpUser):
+
+wait_time = between(1, 2)
+
+  
+
+@task
+
+def calculate_fibonacci(self):
+
+self.client.get("/fibonacci/random")
+```
+
+
+```
+locust --users 10 --spawn-rate 5 -t 1m --autostart -H http://43.200.169.188:8000
+```
+
+
+apache ab
+
+```
+ab -n 100 -c 10 http://devo-lb-1082798530.ap-northeast-2.elb.amazonaws.com/fibonacci/random
+```

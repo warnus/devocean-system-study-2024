@@ -221,6 +221,17 @@ Key: user_session:1 Value: {"user_id": 1, "username": "example_user", "login_tim
 	- 안정성(reliability) : 서버 일부가 망가져도 데이터가 보존됨
 	- 가용성(availability) : 서버에 장애가 발생해도 다른 곳에서 데이터를 제공
 
+#### 로드밸런서와 데이터베이스 다중화 설계안
+
+![](/이우승/assets/ch-01/ch01_08.jpg)
+
+동작 시나리오
+1. 사용자는 DNS로 부터 로드밸런서 Public IP 획득
+2. 사용자는 해당 IP 주소로 로드밸런서 접속
+3. HTTP 요청은 서버 1 또는 서버 2로 전달
+4. 웹 서버는 사용자 데이터를 slave db에서 읽음
+5. 데이터 업데이트 연산은 master db로 전달
+
 ## 참고
 ### Web Server & Web Application
 - https://gmlwjd9405.github.io/2018/10/27/webserver-vs-was.html
