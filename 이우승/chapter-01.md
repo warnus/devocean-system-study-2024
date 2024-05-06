@@ -301,7 +301,7 @@ Key: user_session:1 Value: {"user_id": 1, "username": "example_user", "login_tim
 - 이미지, 비디오, CSS, Javascript 파일 등을 캐시
 
 ![](/이우승/assets/ch-01/ch01_11.jpg)
-
+![](/이우승/assets/ch-01/ch01_19.png)
 ### CDN 사용 시 고려사항
 
 - 비용
@@ -309,6 +309,15 @@ Key: user_session:1 Value: {"user_id": 1, "username": "example_user", "login_tim
 - CDN 장애 대응 방안
 - 콘텐츠 무효화 방법
 
+### 대표적 CDN 서비스
+
+- **Amazon CloudFront**
+- **Akamai**
+- **Cloudflare**
+- **Google Cloud CDN**
+- **Microsoft Azure CDN**
+- **Fastly**
+- **StackPath**
 
 ### CDN과 캐시가 추가된 설계안
 
@@ -423,3 +432,6 @@ Key: user_session:1 Value: {"user_id": 1, "username": "example_user", "login_tim
 - https://yoongrammer.tistory.com/101
 - https://twitter.com/sahnlam/status/1767053897028550763/photo/1
 - https://velog.io/@psk84/Caching-%EC%A0%84%EB%9E%B5
+
+### CDN
+- https://www.smileshark.kr/post/what-is-a-cdn-cdn-comparison-analysis
