@@ -29,6 +29,12 @@ DNS(Domain Name Server)에 질의하여 domain name을 IP 주소로 변환하는
         - 아주 많은 양의 데이터 저장
     - CouchDB, Neo4j, Cassandra, HBase, DynamoDB 등
 
+**NoSQL의 종류**
+1. key-value: 주로 조회 성능 향상을 위한 데이터 캐싱 용도, Redis, AWS DynamoDB 등
+2. graph: node 간의 관계를 구성할 수 있음, 소셜 그래프 등에서 사용됨, Neo4j 등
+3. column: 대용량 데이터의 read/write 성능과 고가용성을 위해 설계됨, 쓰기 작업이 많은 애플리케이션에서 사용됨, Hbase, Cassandra 등
+4. document: document타입(JSON, XML 등)으로 저장됨, MongoDB 등
+
 ### Scale up vs. Scale out
 
 **수직적 규모 확장(scale up):** 서버에 고사양 자원을 추가하는 행위, 
@@ -166,3 +172,7 @@ load balancing set에 속한 웹 서버들에게 트패픽을 부하를 고르�
 - 유명인사 문제: 유명인사가 같은 샤드에 포함되어 있다고 가정, SNS을 구축하게 되면 해당 샤드에는 빈번한 read 연산때문에 과부하가 발생
 - 조인과 비정규화: 하나의 데이터베이스를 여러 샤드로 쪼개고 나면, 여러 샤드에 걸친 데이터를 조인하기가 어려워짐
     - 데이터베이스를 비정규화하여 하나의 테이블에서 질의가 가능하도록 변경
+
+---
+### NoSQL
+[NoSQL 데이터베이스별 특징](https://jaemunbro.medium.com/nosql-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8A%B9%EC%84%B1-%EB%B9%84%EA%B5%90-c9abe1b2838c)
