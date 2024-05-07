@@ -93,10 +93,35 @@ load balancing set에 속한 웹 서버들에게 트패픽을 부하를 고르�
 
 애플리케이션의 성능은 데이터베이스를 얼마나 자주 호출하느냐에 좌우됨 → 캐시를 추가하여 호출 횟수 완화
 
-- **읽기 주도형 캐시 전략(read-through caching strategy)**
-    
-  <img width="500" src="https://github.com/warnus/devocean-system-study-2024/assets/58351498/24a518b5-fe3b-4370-a106-9d5a79099122" />
-  
+**캐싱 전략 패턴**
+> Cache와 Database 사이의 데이터 불일치 문제를 해결하기 위해 적절한 캐시 읽기 전략과 쓰기 전략을 생각해봐야 함
+
+- 캐시 읽기 전략
+    - Look Aside 패턴
+      - 데이터를 먼저 캐시에서 우선적으로 찾는 전략, 만약 캐시에 데이터가 존재하지 않으면 DB에서 조회 후 캐시에 저장
+      - 반복적인 읽기 연산이 많은 호출에 적합
+      - 캐시와 db 사이의 데이터 정합성 문제 발생
+    - Read Through
+      - <img width="500" src="https://github.com/warnus/devocean-system-study-2024/assets/58351498/24a518b5-fe3b-4370-a106-9d5a79099122" /> 
+      - 데이터 동기화를 캐시 제공자에게 위임하는 방식 -> 속도가 느림
+      - 데이터 동기화가 항상 이루어지기 때문에 데이터 정합성 문제 해결
+        
+- 캐시 쓰기 전략
+    - Write Back
+      - 데이터를 저장할때 바로 db에 쿼리를 날리지 않고 캐시에 모아 일정 주기 배치 작업을 통해 db 반영
+      - 모아놨다가 한번에 쓰기 연산을 수행하므로 부하 감소
+      - write가 빈번하고 read하는데 많은 양의 자원이 소모되는 서비스에 적합
+      - 데이터 정합성 확보
+      - But, 캐시에 장애발생시 데이터 영구소실 및 자주 사용되지 않는 데이터가 저장됨
+    - Write Through
+      - db와 캐시에 동시에 데이터를 저장하는 전략
+      - 캐시에 먼저 저장하고 db 동기화 작업을 캐시에 위임
+      - 캐시의 데이터는 항상 최신 상태이므로 데이터 유실이 발생하면 안되는 상황에 적합
+      - But, 자주 사용되지 않는 데이터 저장 및 매 요청마다 두번의 write가 발생하여 빈번하게 변경이 발생하는 서비스에서는 성능 이슈 발생
+    - Write Around
+      - 모든 데이터는 db에 저장되고 캐시가 갱신되지 않음
+      - Cache miss가 발생하는 경우에만 db와 캐시에도 데이터 저장
+      - Cache miss가 발생하기 전, db에 저장된 데이터가 수정되었을 때 캐시와 db 사이의 데이터 불일치 발생
 
 **캐시 사용시 유의점**
 
@@ -174,5 +199,8 @@ load balancing set에 속한 웹 서버들에게 트패픽을 부하를 고르�
     - 데이터베이스를 비정규화하여 하나의 테이블에서 질의가 가능하도록 변경
 
 ---
+### Cache
+[Redis 캐시 설계 전략 지침 총정리](https://inpa.tistory.com/entry/REDIS-%F0%9F%93%9A-%EC%BA%90%EC%8B%9CCache-%EC%84%A4%EA%B3%84-%EC%A0%84%EB%9E%B5-%EC%A7%80%EC%B9%A8-%EC%B4%9D%EC%A0%95%EB%A6%AC)
+
 ### NoSQL
 [NoSQL 데이터베이스별 특징](https://jaemunbro.medium.com/nosql-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4-%ED%8A%B9%EC%84%B1-%EB%B9%84%EA%B5%90-c9abe1b2838c)
