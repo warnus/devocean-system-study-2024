@@ -37,9 +37,15 @@
 - **일반적으로 Join 미지원**
 - 세부 분류
 	- key-value store
+		- Redis, Memcached, Couchbase
 	- graph store
+		- Neo4j, Amazon Neptune, ArangoDB
 	- column store
+		- Amazon Redshift, Google BigQuery
 	- document store
+		- MongoDB
+		- Couchbase
+		- CouchDB
 
 #### NoSQL 추천하는 경우
 - 아주 낮은 응답지연시간 요구
@@ -199,6 +205,8 @@
 		    - 해결책 - 비정규화 해서 하나의 테이블에서 쿼리 가능하도록
 
 ![IMG_7813.jpg](assets/IMG_7813.jpg)
+
+
 ### 백만 사용자, 그리고 그 이상
 
 시스템 규모를 확장하는 것은 지속적이고 반복적인 과정
