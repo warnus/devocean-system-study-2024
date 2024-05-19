@@ -338,4 +338,5 @@ descriptors:
 
 # 참고
 [Redis Lua Script를 이용해서 API Rate Limiter개발](https://dev.gmarket.com/69)
+
 [Implementing Scalable Rate Limiting in a Distributed Environment with Lua Scripts and Redis Sorted Sets](https://mahdie-asiyaban.medium.com/implementing-scalable-rate-limiting-in-a-distributed-environment-with-lua-scripts-and-redis-sorted-3d743ab8734a)
