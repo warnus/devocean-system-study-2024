@@ -271,8 +271,22 @@ descriptors:
 
 **경쟁 조건을 해결하는 방법**  
 - lock: 시스템 성능을 저하시킴
-- 루아 스크립트
+- 루아 스크립트: Redis 2.6버전부터 Lua script 실행 지원, Lua script에서 작성한 로직을 실행하면 해당 연산이 Redis 서버에 `원자적으로` 처리되므로 race condition 해결 가능
+  - 만약, 동시에 4개의 컨슈머가 루아 스크립트를 실행시킨다면 레디스 서버에 순차적으로 atomic 연산을 실행시키므로 가장 먼저 도착한 컨슈마의 루아스크립트가 API 호출 수를 100 증가시키므로 다음 루아 스크립트에서는 API 호출 수가 100임을 확인하고 더이상 API 호출 수를 증가시키지 않고 그대로 현재 값을 반환하게 됨
+  - Redis에서 루아 스크립트를 실행시킬 경우 해당 스크립트는 반드시 짧게 끝나는 로직으로 작성(처리시간이 오래걸리는 로직이 들어가면 싱글스레드 기반의 레디스는 해당 스크립트를 실행하느라 다른 요청을 처리하지 못하기 때문)
+    ``` lua
+    local counter = tonumber(redis.call(‘get’, KEYS[1]))
+    if counter < tonumber(ARGV[1]) then
+     redis.call(‘incr’, KEYS[1])
+     redis.call(‘expire’, KEYS[1], ARGV[2])
+     return 1
+    else
+     return 0
+    end
+    ```
 - 정렬 집합 자료구조 사용
+  - 요청의 타임스탬프를 sorted set에 추가함으로써 특정 시간 window 내에 들어오는 요청의 속도를 정확하게 제어 가능
+  - `ZREMRANGEBYSCORE`: `ZREMRANGEBYSCORE` 명령어를 제공하여 오래된 타임스탬프를 효율적으로 제거하여 성능을 효율적으로 유지
 
 #### 동기화 이슈
 수백만 사용자의 요청을 처리하려면 한대의 처리율 제한 장치 서버로는 충분하지 않을 수 있음 -> 여러 대의 처리율 제한 장치 서버를 둠 -> 동기화 필수
@@ -321,3 +335,7 @@ descriptors:
   - 처리율 제한의 임계치를 이해하고 짧은 시간 동안 너무 많은 메시지를 보내지 않도록 함
   - 예외나 에러를 처리하는 코드를 도입하여 클라이언트가 예외적 상황으로 gracefully 복구될 수 있도록 함
   - 재시도 로직을 구현할 때는 충분한 백오프 시간을 둠
+
+# 참고
+[Redis Lua Script를 이용해서 API Rate Limiter개발](https://dev.gmarket.com/69)
+[Implementing Scalable Rate Limiting in a Distributed Environment with Lua Scripts and Redis Sorted Sets](https://mahdie-asiyaban.medium.com/implementing-scalable-rate-limiting-in-a-distributed-environment-with-lua-scripts-and-redis-sorted-3d743ab8734a)
