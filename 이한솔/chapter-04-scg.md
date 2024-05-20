@@ -29,6 +29,7 @@ public class HelloController {
 `spring-boot-starter-data-redis-reactive` 을 사용하여 rate limiter를 구현하기 때문에 아래와 같이 의존성 추가
 
 - 토큰 버킷 알고리즘으로 구현됨
+  - [request_rate_limiter.lua](https://github.com/spring-cloud/spring-cloud-gateway/blob/af09c72a9a/spring-cloud-gateway-server/src/main/resources/META-INF/scripts/request_rate_limiter.lua)
 
 ```groovy
 implementation 'org.springframework.cloud:spring-cloud-starter-gateway'
