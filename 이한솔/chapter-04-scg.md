@@ -5,7 +5,7 @@
 간단한 spring application 생성
 
 ```groovy
-    implementation("org.springframework.boot:spring-boot-starter-web")
+implementation("org.springframework.boot:spring-boot-starter-web")
 ```
 
 ```java
@@ -55,7 +55,13 @@ public class UserIdKeyResolver implements KeyResolver {
 
 ![result](https://github.com/warnus/devocean-system-study-2024/assets/58351498/108c7f9e-8e32-4ddb-a062-37c349d49e4e)
 
-![toomany](https://github.com/warnus/devocean-system-study-2024/assets/58351498/b8267259-fd9f-4d1e-a6cb-a9003c10f92c)
+- 처리된 요청의 응답
+  
+    ![okok](https://github.com/warnus/devocean-system-study-2024/assets/58351498/6340e4fa-190f-4dfb-9576-dd0ed871cc32)
+  
+- 버려진 요청의 응답
+  
+    ![toomany](https://github.com/warnus/devocean-system-study-2024/assets/58351498/b8267259-fd9f-4d1e-a6cb-a9003c10f92c)
 
 1초마다 1개씩 버킷 (용량=100)에 토큰이 추가됨
 
