@@ -34,7 +34,7 @@
   
 #### 서버 측에 제한 장치를 두는 방법  
 - 서버에 제한 장치를 두는 방법  
-![ratelimiter1](ratelimiter1.png)
+![ratelimiter1](assets/ratelimiter1.png)
 
 - 처리율 제한 장치 미들웨어
 ![ratelimiter2](assets/ratelimiter2.webp)
