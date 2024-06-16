@@ -15,7 +15,7 @@ debugInConsole: false # Print debug info in Obsidian console
 ## 1단계 - 문제이해 및 설계 범위 확정
 - 모호함제거 + 설계 방향 설정
 
-![질문과정.png](assets/질문과정.png)
+![Unique_ID_Generator_Question.png](Unique_ID_Generator_Question.png)
 
 ## 2단계 - 개략적 설계안 제시 및 동의 구하기
 ### ID 만드는 법 
@@ -61,6 +61,7 @@ debugInConsole: false # Print debug info in Obsidian console
 | 구현하기 쉽고 중소 규모의 애플리케이션에 적합 | 티켓 서버를 여러대 두면 데이터 동기화 이슈 |
 
 ### 트위터의 snowflake 접근법
+- 64비트
 - ID의 구조를 여러 Section으로 분할하는 방법
 ![[snowflake.png]]
 - sign 비트: 음수와 양수 판별
