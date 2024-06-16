@@ -227,7 +227,6 @@ Key Key6 is directed to Server4
 
 ## 참고
 
-
 - https://jiwondev.tistory.com/299
 - https://medium.com/@souravdas08/consistent-hashing-implemenation-a00699f408df
 - https://shanu95.medium.com/consistent-hashing-101-a9edbb623f1f
