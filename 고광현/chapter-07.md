@@ -22,7 +22,7 @@ debugInConsole: false # Print debug info in Obsidian console
 - 다중 마스터 복제(multi-master replication)
 - UUID(Universally Unique Identifier)
 - Ticket Server
-- Twitter Snowflask
+- Twitter Snowflake
 ### 다중 마스터 복제(multi-master replication)
 - auto_increment
 - k(DB수) 만큼 증가
