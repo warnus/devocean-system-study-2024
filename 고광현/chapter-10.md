@@ -1,4 +1,4 @@
-# 알림 시스템 설계(Notification System)
+## 알림 시스템 설계(Notification System)
 
 - 최신뉴스, 제품 업데이트, 이벤트, 선물 등 고객에게 중요할 만한 정보를 비동기적으로 제공
 - 종류 : Mobile Push Notification, SMS메시지, 이메일
@@ -94,29 +94,94 @@
 
 
 ### 3단계, 상세 설계
-#### 데이터 손실 방지
 
-- 알림 시스템은 알림 데이터를 DB에 보관하고 재시도 메커니즘을 구현해야 함.
-- 알림 로그를 DB에 유지하는 것도 하나의 방법 → 이를 사용하여 재시도 메커니즘?
+#### 안정성 Reliability
+- 분산 환경에서 운영될 경우 고려사항
+##### 데이터 손실 방지
+- 데이터를 DB에 보관 + 재시도 메커니즘
+- 알림 로그를 DB에 유지하는 것도 하나의 방법 - 쿠팡
 
-#### 재시도 방지
+![notification_system_11.png](assets/notification_system_11.png)
 
-- 작업 서버에 보내야 할 알림이 도착하면 이벤트 ID를 검사하여 이전에 보낸 적이 있는지 확인
-    - 알림 로그를 사용
-    - 계속해서 DB/Cache query? ⇒ 1차적으로 Bloom filter를 이용해 query 전 확인?
+##### 중복 전송 방지
+- 분산시스템 특성상 같은 알림 중복 전송 가능 - https://bravenewgeek.com/you-cannot-have-exactly-once-delivery/
+- 간단 로직
+	- 보내야 할 알림도착시 Event ID 검사하여 이전에 본적이 없는 이벤트 인지 검사
+	- 중복이면 버리고, 아니면 전송
 
-#### 알림 설정
+ㅁㄴㅇㄹㅁㄴㅇㄹ - 쿠팡에서 과정, 설계 
 
-- 사용자가 알림 설정으 상세히 조절할 수 있도록 `알림 설정 테이블` 을 이용.
+#### 추가 컴포넌트 및 고려사항
+
+##### 알림 템플릿
+- 파라미터, 스타일, Tracking Link를 조정해 만들어냄
+- 형식 일관성
+- 개인 의견 - 금칙어 제거
+
+##### 알림 설정
+- 사용자가 상세히 조절할 수 있도록 `알림 설정 테이블` 을 이용.
 - 알림 수단마다 허용 여부를 확인 → 알림 보내기 전 필터링 필요
 
-#### 재시도 방법
 
+
+##### 전송률 제한
+- 사용자 경험 고려
+
+##### 재시도 방법
 - 제 3자 서비스가 알림 전송 실패하면, 재시도 전용 큐에 넣어 알림 재시도
 - 같은 문제가 발생하면 개발자에게 알림(alert)
     - 재시도 전용 큐에 넣을 때, retry 횟수도 넣어야 될 듯?
 
-#### 큐 모니터링
+##### 보안
+- 인증된 클라이언트만 API를 사용하도록 제한
 
-- MQ가 중추적인 역할을 하다보니, 모니터링 필요.
+##### 큐 모니터링
 - 쌓인 알림의 개수를 보면서 처리가 잘 되고 있는지 확인.
+- 처리가 늦는 경우 서버 증설 필요
+
+##### 이벤트 추적
+- 사용자를 이해하기 좋음
+- 알림 확인율, 클릭율, 실제 앱 사용
+
+
+#### 수정된 설계안
+
+![notification_system_12.png](assets/notification_system_12.png)
+
+##### 추가 된 것
+- 알림 서버의 인증, 전송률 제한 기능
+- 전송 실패 대응을 위한 재시도 기능. 실패한 알림은 다시 큐에 넣고 지정된 횟수만큼 재시도 한다.
+- 전송 템플릿 기능
+- 모니터링과 추적을 위한 분석 서비스
+
+### 4단계 마무리
+
+- 안정성: 메시지 전송 실패율을 낮추기 위해 안정적인 재시도 메커니즘 도입
+- 보안: 인증된 클라이언트만이 알림을 보낼 수 있도록 appKey, appSecret 등의 메커니즘 이용
+- 이벤트 추적 및 모니터링
+- 사용자 알림 수신 설정
+- 전송률 제한
+
+
+
+### 추가 생각해볼 거리
+- 클릭이벤트 추적 
+		- APNS의 경우 발송 요청만 가능하고 실제 도달까지 알수 있는 방법이 없음
+			- https://developer.apple.com/documentation/usernotifications/viewing-the-status-of-push-notifications-using-metrics-and-apns
+		- https://developer.apple.com/documentation/usernotifications/handling-notification-responses-from-apns
+		- FCM은 있음 
+			- https://firebase.google.com/docs/cloud-messaging/understand-delivery?hl=ko&_gl=1*1mjx7iw*_up*MQ..*_ga*MTc2OTY4OTMzMy4xNzE5ODIwMzM1*_ga_CW55HF8NVT*MTcxOTgyMDMzNS4xLjAuMTcxOTgyMDMzNS4wLjAuMA..&platform=ios
+
+- 발송 속도 차이 
+	- GCM - 83건
+		- FCM의 경우 한번에 동일 메시지를 여러디바이스에  동시에 보낼수 있는 API 존재 
+	- APNS - 16건/초당
+- 마케팅에서만 사용되는 추가 태그들, 사용자 ID, 리텐션용, 
+- 만료 메시지 만료 시간
+- 장바구니 안내
+
+
+
+![notification_apns1.png](assets/notification_apns1.png)
+
+![notification_apns2.png](assets/notification_apns2.png)
