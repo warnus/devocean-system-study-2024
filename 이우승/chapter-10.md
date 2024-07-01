@@ -148,3 +148,7 @@ iOS, 안드로이드, SMS, 이메일 단말
 ## 수정된 설계안
 
 ![](/이우승/assets/ch-10/ch10_08.jpeg)
+
+# 참고
+
+- https://www.etoday.co.kr/news/view/2227030
