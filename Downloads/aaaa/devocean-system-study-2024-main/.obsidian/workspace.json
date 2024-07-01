@@ -1,0 +1,176 @@
+{
+  "main": {
+    "id": "615f3349781666e0",
+    "type": "split",
+    "children": [
+      {
+        "id": "642aefa0c20f59aa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "19dded9fc2c7c2b6",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "이한솔/chapter-09.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3a6e15bb9ebb1574",
+    "type": "split",
+    "children": [
+      {
+        "id": "b7aea55095e42703",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bc56ecca0bc8e480",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "0e6cb654e7d3f5bc",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "96ba7d643e3bf702",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "0e93358f947d922d",
+    "type": "split",
+    "children": [
+      {
+        "id": "2c13ecbc74bb1f70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "68d541c3af9636e9",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "이한솔/chapter-09.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "919fb8e1b8314bb0",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "이한솔/chapter-09.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "a5c36c48f2f0acbf",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c6cd9f67dc76e7bc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "이한솔/chapter-09.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:퀵 스위처 열기": false,
+      "graph:그래프 뷰 열기": false,
+      "canvas:새 캔버스 만들기": false,
+      "daily-notes:오늘의 데일리 노트 열기": false,
+      "templates:템플릿 삽입": false,
+      "command-palette:명령어 팔레트 열기": false
+    }
+  },
+  "active": "bc56ecca0bc8e480",
+  "lastOpenFiles": [
+    "이한솔/assets/ch09_05.png",
+    "이한솔/assets/ch09_04.png",
+    "이한솔/assets/ch09_03.png",
+    "이한솔/assets/ch09_02.png",
+    "이한솔/chapter-08.md",
+    "이한솔/chapter-09.md",
+    "이한솔/assets/ch09_01.png",
+    "스크린샷 2024-07-01 오전 10.01.14.png",
+    "이한솔/chapter-07.md",
+    "이한솔/assets/ch07_04.png",
+    "이한솔/assets/ch07_03.png",
+    "이한솔/assets/ch07_02.png",
+    "이한솔/assets/ch07_01.png",
+    "스크린샷 2024-06-16 오후 3.16.58.png",
+    "이한솔/chapter-06.md",
+    "이한솔/chapter-05.md",
+    "이한솔/chapter-04.md",
+    "이한솔/chapter-04-scg.md",
+    "이한솔/chapter-03.md",
+    "이한솔/chapter-02.md",
+    "이한솔/chapter-01.md",
+    "이한솔/assets",
+    "이한솔",
+    "이한솔/README.md"
+  ]
+}
