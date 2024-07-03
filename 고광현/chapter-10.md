@@ -4,7 +4,8 @@
 - 종류 : Mobile Push Notification, SMS메시지, 이메일
 
 ### 1단계 문제 이해 및 설계 범위 확정
-![[Notification_System_QnA.png]]
+
+![Notification_System_QnA.png](assets/Notification_System_QnA.png)
 
 ### 2단계 개략적 설계안 제시 및 동의 구하기
 
@@ -109,7 +110,6 @@
 	- 보내야 할 알림도착시 Event ID 검사하여 이전에 본적이 없는 이벤트 인지 검사
 	- 중복이면 버리고, 아니면 전송
 
-ㅁㄴㅇㄹㅁㄴㅇㄹ - 쿠팡에서 과정, 설계 
 
 #### 추가 컴포넌트 및 고려사항
 
