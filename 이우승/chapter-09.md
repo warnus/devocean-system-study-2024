@@ -210,3 +210,4 @@ BFS를 사용하는 경우 다음과 같은 문제 발생
 
 크롤링
 - https://velog.io/@mowinckel/%EC%9B%B9-%ED%81%AC%EB%A1%A4%EB%A7%81-I
+- https://courses.cs.washington.edu/courses/cse454/15au/papers/mercator.pdf
